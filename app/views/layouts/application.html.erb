@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tacostagram Final</title>
+    <title>Wireframes</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,16 +10,21 @@
   </head>
 
   <body>
-    <div>
+    <p>
+      <% @user = User.find_by({ "id" => session["user_id"] }) %>
+      <% if @user == nil %>
+        <a href="/users/new">Sign Up</a> | <a href="/login">Login</a>
+      <% else %>
+        <%= @user["username"] %> | <a href="/logout">Logout</a> | <a href="/users/new">Sign Up</a>
+      <% end %>
+    </p>
+
+    <p>
       <%= flash["notice"] %>
-    </div>
-    <div>
-      <a href="/">Home</a>
-      <a href="/logout">Logout</a>
-      <a href="/login">Login</a>
-      <a href="/users/new">Signup</a>
-    </div>
+    </p>
 
     <%= yield %>
   </body>
 </html>
+  
+
